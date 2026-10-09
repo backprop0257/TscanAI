@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#15803d">
+  <meta name="description" content="TomatoLeafAI -- photograph a tomato leaf and get a disease diagnosis, a Grad-CAM explanation and treatment advice.">
+  <title>TomatoLeafAI &mdash; tomato leaf disease diagnosis</title>
+  <link rel="icon" href="{{ asset_url('favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ asset_url('style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8Z"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-mark">TomatoLeafAI</span>
+          <span class="brand-tag">Leaf disease diagnosis</span>
+        </span>
+      </a>
+
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button type="button" id="tab-btn-diagnose" class="tab active" role="tab" aria-selected="true" aria-controls="tab-diagnose">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.4 4a2 2 0 0 0-1.69.93L6.98 6H5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-1.98l-.73-1.07A2 2 0 0 0 14.6 4Zm2.6 6.5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+          <span>Diagnose</span>
+        </button>
+        <button type="button" id="tab-btn-history" class="tab" role="tab" aria-selected="false" aria-controls="tab-history" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 3a9 9 0 0 0-9 9H1l3.9 3.9L9 12H6a7 7 0 1 1 2.05 4.95l-1.42 1.42A9 9 0 1 0 13 3Zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8Z"/></svg>
+          <span>History</span><span id="history-count" class="tab-badge" hidden></span>
+        </button>
+        <button type="button" id="tab-btn-performance" class="tab" role="tab" aria-selected="false" aria-controls="tab-performance" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 20h16v2H2V2h2v18Zm3-2V10h3v8H7Zm5 0V5h3v13h-3Zm5 0v-6h3v6h-3Z"/></svg>
+          <span>Models</span>
+        </button>
+        <button type="button" id="tab-btn-results" class="tab" role="tab" aria-selected="false" aria-controls="tab-results" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10v2h4v3a5 5 0 0 1-4.6 5A6 6 0 0 1 13 15.9V19h4v2H7v-2h4v-3.1A6 6 0 0 1 7.6 12 5 5 0 0 1 3 7V4h4V2Zm0 4H5v1a3 3 0 0 0 2 2.8V6Zm10 0v3.8A3 3 0 0 0 19 7V6h-2Z"/></svg>
+          <span>Results</span>
+        </button>
+        <button type="button" id="tab-btn-diseases" class="tab" role="tab" aria-selected="false" aria-controls="tab-diseases" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 2v16h12V4h-5v7l-2.5-1.5L8 11V4H6Z"/></svg>
+          <span>Diseases</span>
+        </button>
+        <button type="button" id="tab-btn-about" class="tab" role="tab" aria-selected="false" aria-controls="tab-about" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm1 8h-2v7h2v-7Zm0-4h-2v2h2V6Z"/></svg>
+          <span>About</span>
+        </button>
+      </nav>
+
+      <div class="topbar-actions">
+        <span id="status-pill" class="status-pill {{ 'ok' if ready else ('busy' if loading else 'warn') }}">
+          {% if loading %}Loading models&hellip;{% else %}{{ models_meta|selectattr('loaded')|list|length }} models ready{% if not ready %} &mdash; setup needed{% endif %}{% endif %}
+        </span>
+        <button type="button" id="theme-toggle-btn" class="icon-btn" aria-label="Toggle dark mode" title="Dark / light">
+          <svg id="theme-icon-dark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/></svg>
+          <svg id="theme-icon-light" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M12 4V2m0 20v-2M4.93 4.93 3.51 3.51m16.98 16.98-1.42-1.42M4 12H2m20 0h-2M4.93 19.07l-1.42 1.42M19.07 4.93l1.42-1.42M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+  <!-- ======================= DIAGNOSE ======================= -->
+  <section id="tab-diagnose" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-diagnose" tabindex="-1">
+
+    <div id="loading-banner" class="banner notice" {{ '' if loading else 'hidden' }}>
+      <strong>Loading the trained models&hellip;</strong>
+      <span id="loading-detail">This takes about 20&ndash;60&nbsp;s the first time. You can already choose a photo.</span>
+      <div class="bar small"><span id="loading-bar"></span></div>
+    </div>
+    <div id="setup-banner" class="banner warn" {{ '' if (not ready and not loading) else 'hidden' }}>
+      <strong>No trained models found.</strong>
+      Copy any trained models (<code>.keras</code> / <code>.h5</code>, e.g. the notebook&rsquo;s <code>&lt;Model&gt;_final.keras</code>)
+      into the <code>models/</code> folder &mdash; plus <code>ood_gate.keras</code>, <code>feature_ood_v21.json</code> and
+      <code>class_indices.json</code> if you have them &mdash; or upload one on the <a href="#performance">Models</a> tab.
+      They are picked up automatically, no restart needed. See README.
+      <div class="details" id="setup-errors">{% for e in load_errors %}<div>&middot; {{ e }}</div>{% endfor %}</div>
+    </div>
+    <details id="notice-banner" class="banner notice" {{ '' if (notices or load_errors) and ready else 'hidden' }}>
+      <summary><span id="notice-count">{{ (notices|length) + (load_errors|length) }}</span> startup notice(s)</summary>
+      <div class="details" id="notice-list">{% for e in load_errors + notices %}<div>&middot; {{ e }}</div>{% endfor %}</div>
+    </details>
+
+    <div class="diagnose-layout">
+      <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" id="upload-form" class="card input-card">
+        <ol class="flow" aria-label="Steps">
+          <li class="flow-step" id="flow-photo"><span class="flow-num">1</span>Photo</li>
+          <li class="flow-step" id="flow-model"><span class="flow-num">2</span>Model</li>
+          <li class="flow-step" id="flow-run"><span class="flow-num">3</span>Run</li>
+        </ol>
+
+        <label class="dropzone" id="dropzone" for="leaf_image">
+          <input type="file" id="leaf_image" name="leaf_image" accept="image/*" required>
+          <span class="dropzone-empty" id="dropzone-empty">
+            <span class="dropzone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 16a1 1 0 0 1-1-1V7.41l-2.3 2.3a1 1 0 1 1-1.4-1.42l4-4a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1-1.4 1.42L13 7.41V15a1 1 0 0 1-1 1Zm-7 2a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z"/></svg>
+            </span>
+            <span class="dropzone-title">Choose a leaf photo</span>
+            <span class="dropzone-sub">Tap to browse &middot; drag &amp; drop &middot; paste</span>
+          </span>
+          <img id="upload-preview" class="dropzone-preview" alt="Selected leaf photo" hidden>
+          <span id="upload-change" class="dropzone-change" hidden>Change photo</span>
+        </label>
+        <p id="upload-info" class="upload-info" hidden></p>
+        <div id="batch-zone" class="batch-zone" hidden>
+          <label class="dropzone dropzone-batch" id="batch-drop" for="batch-input">
+            <input type="file" id="batch-input" accept="image/*" multiple>
+            <span class="dropzone-empty" id="batch-empty">
+              <span class="dropzone-title">Choose several leaf photos</span>
+              <span class="dropzone-sub">Up to {{ batch_max }} photos &middot; one model &middot; drag &amp; drop</span>
+            </span>
+          </label>
+          <div id="batch-thumbs" class="batch-thumbs" hidden></div>
+          <p id="batch-info" class="upload-info" hidden></p>
+          <button type="button" id="batch-clear-btn" class="btn btn-soft btn-small" hidden>Remove all</button>
+        </div>
+
+        <div class="source-row">
+          <button type="button" id="camera-btn" class="btn btn-soft">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M9.4 4a2 2 0 0 0-1.69.93L6.98 6H5a3 3 0 0 0-3 3v9a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-1.98l-.73-1.07A2 2 0 0 0 14.6 4Zm2.6 6.5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+            Camera
+          </button>
+          <input type="file" id="camera-input" accept="image/*" capture="environment" hidden>
+          <button type="button" id="clear-photo-btn" class="btn btn-soft" hidden>Remove</button>
+        </div>
+
+        <div class="field">
+          <span class="field-label" id="mode-label">Run with</span>
+          <div class="segmented" role="radiogroup" aria-labelledby="mode-label">
+            <label><input type="radio" name="run_mode" value="single" checked><span>One model</span></label>
+            <label><input type="radio" name="run_mode" value="compare"><span id="compare-label">Compare ({{ models_meta|selectattr('loaded')|list|length }})</span></label>
+            <label><input type="radio" name="run_mode" value="batch"><span>Batch</span></label>
+          </div>
+        </div>
+
+        <div class="field" id="model-field">
+          <label for="model-select" class="field-label">Model</label>
+          <select id="model-select" name="model_name">
+            {% for m in models_meta if m.loaded or m.on_disk %}
+            <option value="{{ m.name }}" {{ 'selected' if m.name == default_model else '' }} {{ '' if m.loaded else 'disabled' }}>
+              {{ m.label }}{% if m.accuracy is not none %} &mdash; {{ "%.1f"|format(m.accuracy * 100) }}% test acc.{% endif %}{% if not m.loaded %}{{ ' (failed to load)' if m.state == 'error' else ' (loading…)' }}{% endif %}
+            </option>
+            {% else %}
+            <option value="">No models found</option>
+            {% endfor %}
+          </select>
+          <small id="model-desc" class="field-help"></small>
+        </div>
+
+        <button type="submit" id="run-btn" class="btn btn-primary btn-big" {{ 'disabled' if not ready else '' }}>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="m10 17 6-5-6-5v10Z"/></svg>
+          <span id="run-btn-label">Diagnose</span>
+        </button>
+        <noscript>
+          <button type="submit" formaction="{{ url_for('compare') }}" class="btn btn-soft">Compare all models</button>
+        </noscript>
+        <p class="tip">Best results: one leaf, in focus, filling most of the frame, in daylight.</p>
+
+        {% if error %}<div class="banner error">{{ error }}</div>{% endif %}
+      </form>
+
+      <section class="card output-card" id="results-section" aria-label="Result">
+        <div id="progress-panel" class="progress-panel" hidden>
+          <div class="progress-head"><strong id="progress-title">Working&hellip;</strong><span id="progress-pct">0%</span></div>
+          <div class="bar"><span id="progress-bar"></span></div>
+          <ol id="progress-steps" class="progress-steps">
+            <li data-stage="segment">Background removal</li>
+            <li data-stage="leafcheck">Tomato-leaf check</li>
+            <li data-stage="predict">Prediction + Grad-CAM</li>
+            <li data-stage="advice">Treatment advice</li>
+          </ol>
+          <p id="progress-detail" class="muted small"></p>
+        </div>
+        <div id="results-panel" aria-live="polite">
+        {% if results or compare_results %}
+          <noscript>
+            {% set r = results or compare_results %}
+            <div class="verdict {{ 'ok' if r.accepted else 'bad' }}">{{ r.display_name }}</div>
+            <p>{{ r.message or r.advice or '' }}</p>
+          </noscript>
+        {% else %}
+          <div class="empty-state">
+            <div class="empty-art" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="48" height="48"><path fill="currentColor" d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8Z"/></svg>
+            </div>
+            <h2>Ready when you are</h2>
+            <p>Add a photo of one tomato leaf. Each step is shown here as it runs.</p>
+            <ol class="empty-steps">
+              <li>Background removal</li><li>Leaf check</li><li>Prediction</li><li>Grad-CAM</li><li>Advice</li>
+            </ol>
+          </div>
+        {% endif %}
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ======================= HISTORY ======================= -->
+  <section id="tab-history" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-history" tabindex="-1">
+    <div class="page-head">
+      <h1>History</h1>
+      <div class="page-actions">
+        <button type="button" id="history-export-btn" class="btn btn-soft btn-small" hidden>Export CSV</button>
+        <button type="button" id="history-clear-stale-btn" class="btn btn-soft btn-small" hidden>Clear old results</button>
+        <button type="button" id="history-clear-btn" class="btn btn-soft btn-small" hidden>Clear all</button>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Filter history">
+        <button type="button" class="chip active" data-filter="all">All</button>
+        <button type="button" class="chip" data-filter="ok">Diagnosed</button>
+        <button type="button" class="chip" data-filter="unsure">Not sure</button>
+        <button type="button" class="chip" data-filter="ood">Not a leaf</button>
+      </div>
+      <input type="search" id="history-search" class="search" placeholder="Search disease, model, file&hellip;" aria-label="Search history">
+    </div>
+    <p id="history-stale-note" class="banner notice" hidden></p>
+    <div id="history-list" class="history-list"><p class="placeholder">Loading&hellip;</p></div>
+  </section>
+
+  <!-- ======================= MODELS ======================= -->
+  <section id="tab-performance" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-performance" tabindex="-1">
+    <div class="page-head">
+      <h1>Models</h1>
+      <div class="models-toolbar">
+        {% if public_mode and admin_enabled %}<button type="button" id="admin-btn" class="btn btn-soft" title="Model management (admin token)">Admin</button>{% endif %}
+        <button type="button" id="rescan-btn" class="btn btn-soft" title="Look again in models/ and results/" {{ 'hidden' if public_mode else '' }}>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.74 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/></svg>
+          Rescan</button>
+        <button type="button" id="add-model-btn" class="btn btn-primary" {{ 'hidden' if public_mode else '' }}>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>
+          Add a model</button>
+      </div>
+    </div>
+    <p class="lead">Every trained model in <code>models/</code> is listed and usable &mdash; the notebook&rsquo;s models or any other Keras classifier.
+      Numbers come from your evaluation files (<code>results/</code>) when they exist. Click a model for details and charts.
+      <span id="models-summary" class="muted small"></span></p>
+    <form id="add-model-form" class="card add-model-form" hidden>
+      <h2 class="section-title" style="margin-top:0">Add a trained model</h2>
+      <p class="small muted">A full model file (<code>.keras</code> or <code>.h5</code>, not weights only). It is saved into <code>models/</code> and loaded in the background.
+        Copying a file into <code>models/</code> works too (also SavedModel folders) &mdash; the app notices it within a few seconds.</p>
+      <div class="add-grid">
+        <label class="field"><span class="field-label">Model file *</span><input type="file" id="model-file" name="model_file" accept=".keras,.h5,.hdf5" required></label>
+        <label class="field"><span class="field-label">Display name</span><input type="text" name="label" placeholder="e.g. ResNet50 (fine-tuned)" maxlength="80"></label>
+        <label class="field"><span class="field-label">Type</span><select name="kind"><option value="">guess</option><option value="proposed">Proposed</option><option value="baseline">Baseline</option><option value="ablation">Ablation</option><option value="custom">Custom</option></select></label>
+        <label class="field"><span class="field-label">Input scaling used in training</span><select name="preprocess">
+          <option value="">detect automatically</option><option value="0-1">pixels / 255 (0–1)</option><option value="0-255">raw pixels (0–255)</option>
+          <option value="-1-1">-1 to 1</option><option value="caffe">Keras VGG/ResNet &ldquo;caffe&rdquo;</option><option value="torch">ImageNet mean/std</option></select></label>
+        <label class="field"><span class="field-label">Class names (optional JSON)</span><input type="file" name="classes_file" accept=".json"></label>
+      </div>
+      <small class="field-help">Class names are needed only when the model was trained on a different class list than <code>models/class_indices.json</code>.</small>
+      <div class="chip-row" style="margin-top:12px"><button type="submit" id="upload-model-btn" class="btn btn-primary">Upload &amp; load</button><span id="upload-model-status" class="small muted"></span></div>
+    </form>
+    <div id="models-view"><p class="placeholder">Loading&hellip;</p></div>
+  </section>
+
+  <!-- ======================= RESULTS ======================= -->
+  <section id="tab-results" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-results" tabindex="-1">
+    <div class="page-head">
+      <h1>Thesis results</h1>
+      <div class="page-actions"><button type="button" id="results-reload-btn" class="btn btn-soft btn-small">Reload</button></div>
+    </div>
+    <p class="lead">What the v24 notebook measured, read straight from its <code>results/</code> files: research questions and hypotheses,
+      the evidence on whether the proposed hybrid is the best model, robustness, Grad-CAM faithfulness, the tomato-leaf gate and data validation.
+      Hover or focus any bar or cell for its exact value; every chart has a table view.</p>
+    <div id="results-view" class="viz-root"><p class="placeholder">Loading&hellip;</p></div>
+  </section>
+
+  <!-- ======================= DISEASES ======================= -->
+  <section id="tab-diseases" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-diseases" tabindex="-1">
+    <div class="page-head">
+      <h1>Diseases <span class="muted">({{ class_names|length }})</span></h1>
+      <input type="search" id="disease-search" class="search" placeholder="Search&hellip;" aria-label="Search diseases">
+    </div>
+    <div class="disease-grid" id="disease-grid">
+      {% for cn in class_names %}
+      {% set a = advice.get(cn, {}) %}
+      {% set is_healthy = 'healthy' in cn|lower %}
+      <article class="disease-card {{ 'healthy' if is_healthy else 'disease' }}" data-search="{{ ((cn|tomato_name) ~ ' ' ~ cn ~ ' ' ~ (a.get('pathogen_type') or ''))|lower }}">
+        <span class="disease-tag">{{ 'Healthy' if is_healthy else (a.get('pathogen_type') or 'Disease')|capitalize }}</span>
+        <h3>{{ a.get('display_name', cn|tomato_name) }}</h3>
+        <p>{{ a.get('advice', 'No advice available yet.') }}</p>
+        {% for key, title in [('symptoms_observed', 'What to look for'), ('cultural_practices', 'Cultural practices'), ('sanitation', 'Sanitation'), ('irrigation_water_management', 'Irrigation & water'), ('monitoring_advice', 'Monitoring'), ('prevention_advice', 'Prevention')] %}
+          {% if a.get(key) %}
+          <details class="acc"><summary>{{ title }}</summary><ul>{% for item in a.get(key) %}<li>{{ item }}</li>{% endfor %}</ul></details>
+          {% endif %}
+        {% endfor %}
+      </article>
+      {% endfor %}
+    </div>
+    <p class="small muted" id="disease-disclaimer"></p>
+  </section>
+
+  <!-- ======================= ABOUT ======================= -->
+  <section id="tab-about" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-about" tabindex="-1">
+    <div class="about">
+      <div class="card about-card">
+        <h1>How it works</h1>
+        <ol class="pipeline">
+          <li><strong>Resize</strong><span>Your photo is shrunk to at most 1280&nbsp;px in the browser before upload.</span></li>
+          <li><strong>Background removal (V3)</strong><span>The leaf is cut out and cropped; soil, stones, mulch, grass and shadows are removed while diseased spots are kept &mdash; the same method the models were trained with.</span></li>
+          <li><strong>Tomato-leaf check</strong><span>Photo quality, then leaf shape, toothed edge, veins, colour and texture, then a deep check against the tomato training data (OOD-gate CNN, Mahalanobis and energy scores). Accept threshold {{ "%.2f"|format(cfg.ood_threshold) }}{% if not cfg.gate_calibrated %} (deep stage not calibrated yet){% endif %}.</span></li>
+          <li><strong>Prediction</strong><span>Any model in <code>models/</code> can be used; each gets the crop at its own input size and scaling. It picks one of its classes ({{ class_names|length }} tomato classes for the notebook models); confidence is calibrated with the model&rsquo;s own fitted temperature when one exists (notebook Cell 8.2).</span></li>
+          <li><strong>Grad-CAM</strong><span>A heatmap on the model&rsquo;s last feature map (the native 14&times;14 lesion map for v21 models; the ViT token grid or a gradient saliency map for models without one). The Leaf-Focus Score says how much of the attention is on the leaf, the Lesion-Focus Score how much is on diseased tissue.</span></li>
+          <li><strong>Decision &amp; advice</strong><span>Under {{ "%.0f"|format(cfg.conf_threshold * 100) }}% confidence it says &ldquo;Not sure&rdquo; instead of guessing, then shows management advice.</span></li>
+        </ol>
+      </div>
+      <div class="card about-card author-card">
+        <span class="author-avatar" aria-hidden="true">DK</span>
+        <div>
+          <h2>{{ author }}</h2>
+          <p class="muted">MIT in Artificial Intelligence &middot; Gandaki University</p>
+          <p class="small muted">A decision-support tool &mdash; confirm with an agronomist before treating.</p>
+          {% if public_mode %}<p class="small muted">Privacy: your photos are processed on this server and kept in your own history (linked to an anonymous id in this browser) until you delete them. Other visitors cannot see them.</p>{% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>&copy; 2026 TomatoLeafAI &middot; Developed by <strong>{{ author }}</strong></span>
+      <span class="muted">MIT-AI, Gandaki University &middot; <a href="{{ url_for('health') }}">Health</a> &middot; <a href="{{ url_for('api_performance') }}">API</a></span>
+    </div>
+  </footer>
+
+  <!-- ======================= DIALOGS ======================= -->
+  <dialog id="history-modal" class="modal modal-wide" aria-labelledby="history-modal-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="history-modal-title" class="modal-title">Diagnosis</h2>
+        <p id="history-modal-meta" class="modal-meta"></p>
+      </div>
+      <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+    </div>
+    <div id="history-modal-body" class="modal-body"></div>
+  </dialog>
+
+  <dialog id="model-modal" class="modal modal-wide" aria-labelledby="model-modal-title">
+    <div class="modal-header">
+      <div>
+        <h2 id="model-modal-title" class="modal-title">Model</h2>
+        <p id="model-modal-meta" class="modal-meta"></p>
+      </div>
+      <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+    </div>
+    <div id="model-modal-body" class="modal-body"></div>
+  </dialog>
+
+  <dialog id="camera-modal" class="modal" aria-labelledby="camera-modal-title">
+    <div class="modal-header">
+      <h2 id="camera-modal-title" class="modal-title">Take a photo</h2>
+      <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body camera-body">
+      <div id="camera-error" class="banner error" hidden></div>
+      <video id="camera-video" autoplay playsinline muted></video>
+      <canvas id="camera-canvas" hidden></canvas>
+      <button type="button" id="camera-capture-btn" class="btn btn-primary btn-big">Capture</button>
+    </div>
+  </dialog>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Image viewer">
+    <button type="button" class="modal-close lightbox-close" data-close aria-label="Close">&times;</button>
+    <img id="lightbox-img" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
+
+  {% if results %}
+  <script id="initial-result" type="application/json" data-mode="predict">{{ results|tojson }}</script>
+  {% elif compare_results %}
+  <script id="initial-result" type="application/json" data-mode="compare">{{ compare_results|tojson }}</script>
+  {% endif %}
+  <script id="app-config" type="application/json">{{ {
+    "conf_threshold": cfg.conf_threshold,
+    "ood_threshold": cfg.ood_threshold,
+    "gate_calibrated": cfg.gate_calibrated,
+    "models": models_meta,
+    "default_model": default_model,
+    "version": model_version,
+    "loading": loading,
+    "temperatures": temperatures,
+    "pipeline_version": pipeline_version,
+    "chart_base": url_for('index') ~ 'eval-charts/',
+    "public_mode": public_mode,
+    "batch_max": batch_max,
+    "admin_enabled": admin_enabled,
+  }|tojson }}</script>
+  <script src="{{ asset_url('net.js') }}"></script>
+  <script src="{{ asset_url('app.js') }}"></script>
+  <script src="{{ asset_url('results.js') }}"></script>
+</body>
+</html>

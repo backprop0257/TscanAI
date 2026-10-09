@@ -1,0 +1,97 @@
+{
+  "accept_threshold": 0.7207418481191,
+  "deep_thresholds": {
+    "ood_gate_prob": 0.00835249213501811,
+    "maha_score": 0.011237499999999984,
+    "msp": 0.8574743008613587
+  },
+  "component_auroc": {
+    "ood_gate_prob": 0.9897565789473685,
+    "maha_score": 0.8797423245614036,
+    "energy_score": 0.7818947368421052,
+    "msp": 0.8715811403508771
+  },
+  "deep_weight": 0.6,
+  "feature_model": "Hybrid_CNN_ViT",
+  "bands": {
+    "coverage": [
+      0.04,
+      0.95,
+      0.04
+    ],
+    "green_frac": [
+      0.3,
+      1.0,
+      0.25
+    ],
+    "leafcolor_frac": [
+      0.8,
+      1.0,
+      0.2
+    ],
+    "solidity": [
+      0.55,
+      0.985,
+      0.2
+    ],
+    "elongation": [
+      1.0,
+      4.5,
+      2.0
+    ],
+    "convexity_ratio": [
+      1.02,
+      1.8,
+      0.25
+    ],
+    "vein_ridge": [
+      1.2,
+      14.0,
+      1.0
+    ],
+    "texture_energy": [
+      1.5,
+      22.0,
+      6.0
+    ],
+    "orientation_coherence": [
+      0.0,
+      0.7,
+      0.2
+    ],
+    "boundary_contrast": [
+      12.0,
+      400.0,
+      6.0
+    ]
+  },
+  "temperature": 0.3869579602707148,
+  "ood_gate_input": "background_removed",
+  "pipeline": "v22",
+  "heldout": {
+    "tomato_accept_rate": 0.9116666666666666,
+    "non_tomato_reject_rate": 0.9763157894736842,
+    "per_category_reject_rate": {
+      "background": 0.9758064516129032,
+      "hard_negative": 0.9466666666666667,
+      "non_leaf": 1.0,
+      "other_leaf": 0.972
+    },
+    "per_source_reject_rate": {
+      "background/dtd": 1.0,
+      "background/fieldbg": 0.9620253164556962,
+      "hard_negative/cat5": 0.9466666666666667,
+      "non_leaf/faces": 1.0,
+      "non_leaf/scenes": 1.0,
+      "other_leaf/plantdoc": 0.97,
+      "other_leaf/pv-other": 0.9733333333333334
+    },
+    "unseen_source_reject_rate": null,
+    "n_tomato": 600,
+    "n_other": 760,
+    "gate_auroc": 0.9781754385964911,
+    "gate_fpr_at_95tpr": 0.04736842105263158,
+    "classifier_acc_all_tomato": 0.9816666666666667,
+    "classifier_acc_accepted": 0.9926873857404022
+  }
+}

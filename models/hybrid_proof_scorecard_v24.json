@@ -1,0 +1,186 @@
+{
+  "verdict": "HYBRID IS THE BEST MODEL -- best mean rank and first on Field-Test macro-F1; not every difference is statistically significant (see the paired tests)",
+  "best_mean_rank": [
+    "Hybrid_CNN_ViT"
+  ],
+  "first_on_primary": [
+    "Hybrid_CNN_ViT"
+  ],
+  "mean_rank": {
+    "Hybrid_CNN_ViT": 1.1,
+    "EfficientNetB7": 2.0,
+    "VGG16": 3.3,
+    "RegNetY008": 4.1,
+    "CNN_Only": 4.5
+  },
+  "first_places": {
+    "CNN_Only": 0,
+    "EfficientNetB7": 1,
+    "Hybrid_CNN_ViT": 9,
+    "RegNetY008": 0,
+    "VGG16": 0
+  },
+  "hybrid_vs_backbones_field_macro_f1": {
+    "CNN_Only": {
+      "diff_pp": 18.616602502669576,
+      "ci95_pp": [
+        17.137169140579896,
+        20.285567414022182
+      ],
+      "mcnemar_p": 1.8333236103609985e-155,
+      "significant": true
+    },
+    "VGG16": {
+      "diff_pp": 1.4413827944141921,
+      "ci95_pp": [
+        0.6390283237506613,
+        2.262688433892269
+      ],
+      "mcnemar_p": 1.6099271769508826e-07,
+      "significant": true
+    },
+    "RegNetY008": {
+      "diff_pp": 12.434069693396266,
+      "ci95_pp": [
+        11.087981556566051,
+        13.75538424966776
+      ],
+      "mcnemar_p": 5.92040579925774e-101,
+      "significant": true
+    },
+    "EfficientNetB7": {
+      "diff_pp": 0.3076906991602235,
+      "ci95_pp": [
+        -0.27522054776781435,
+        0.870315526100467
+      ],
+      "mcnemar_p": 0.019520472782460274,
+      "significant": false
+    }
+  },
+  "seeds": {},
+  "cost": {
+    "CNN_Only": {
+      "params_M": 6.29,
+      "ms_per_image_batch1": 13.1
+    },
+    "VGG16": {
+      "params_M": 16.97,
+      "ms_per_image_batch1": 22.4
+    },
+    "RegNetY008": {
+      "params_M": 4.6,
+      "ms_per_image_batch1": 16.0
+    },
+    "EfficientNetB7": {
+      "params_M": 67.03,
+      "ms_per_image_batch1": 71.7
+    },
+    "Hybrid_CNN_ViT": {
+      "params_M": 70.41,
+      "ms_per_image_batch1": 72.7
+    }
+  },
+  "criteria": {
+    "Field macro-F1 (primary)": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.7773783702979692,
+        "VGG16": 0.949130567380523,
+        "RegNetY008": 0.8392036983907023,
+        "EfficientNetB7": 0.9604674883330627,
+        "Hybrid_CNN_ViT": 0.963544395324665
+      }
+    },
+    "Field accuracy": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.7765685019206146,
+        "VGG16": 0.9516645326504481,
+        "RegNetY008": 0.839628681177977,
+        "EfficientNetB7": 0.9635083226632523,
+        "Hybrid_CNN_ViT": 0.9686299615877081
+      }
+    },
+    "PV macro-F1": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.8366389804320111,
+        "VGG16": 0.9744995152550444,
+        "RegNetY008": 0.9234235570832364,
+        "EfficientNetB7": 0.9769798800245726,
+        "Hybrid_CNN_ViT": 0.9856935634283344
+      }
+    },
+    "PV accuracy": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.9158878504672897,
+        "VGG16": 0.9841840402588066,
+        "RegNetY008": 0.9618979151689432,
+        "EfficientNetB7": 0.9877785765636233,
+        "Hybrid_CNN_ViT": 0.9928109273903667
+      }
+    },
+    "Lab-to-field gap (pp)": {
+      "direction": "lower is better",
+      "values": {
+        "CNN_Only": 13.931934854667515,
+        "VGG16": 3.2519507608358422,
+        "RegNetY008": 12.226923399096624,
+        "EfficientNetB7": 2.4270253900371075,
+        "Hybrid_CNN_ViT": 2.4180965802658605
+      }
+    },
+    "Field ECE after calibration": {
+      "direction": "lower is better",
+      "values": {
+        "CNN_Only": 0.02507868478797309,
+        "VGG16": 0.01218583853617215,
+        "RegNetY008": 0.026369243850704913,
+        "EfficientNetB7": 0.012948345321393965,
+        "Hybrid_CNN_ViT": 0.01071865162150346
+      }
+    },
+    "Robustness: field mCA": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 58.19,
+        "VGG16": 87.47,
+        "RegNetY008": 64.78,
+        "EfficientNetB7": 92.22,
+        "Hybrid_CNN_ViT": 93.68
+      }
+    },
+    "Leaf-Focus Score (field)": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.6320781173535627,
+        "EfficientNetB7": 0.7469186358310955,
+        "Hybrid_CNN_ViT": 0.9254457927573363,
+        "RegNetY008": 0.6429834354126763,
+        "VGG16": 0.5658858891389611
+      }
+    },
+    "Grad-CAM deletion AUC": {
+      "direction": "lower is better",
+      "values": {
+        "CNN_Only": 0.2283,
+        "EfficientNetB7": 0.2066,
+        "Hybrid_CNN_ViT": 0.1704,
+        "RegNetY008": 0.2968,
+        "VGG16": 0.3669
+      }
+    },
+    "Grad-CAM insertion AUC": {
+      "direction": "higher is better",
+      "values": {
+        "CNN_Only": 0.4978,
+        "EfficientNetB7": 0.6281,
+        "Hybrid_CNN_ViT": 0.5846,
+        "RegNetY008": 0.4771,
+        "VGG16": 0.4989
+      }
+    }
+  }
+}

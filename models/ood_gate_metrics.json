@@ -1,0 +1,63 @@
+{
+  "auroc": 0.9970091568423028,
+  "aupr_in": 0.9982284672154156,
+  "aupr_out": 0.9951605414806792,
+  "auprc_in": 0.9982284672154156,
+  "auprc_out": 0.9951605414806792,
+  "fpr_at_95_tpr": 0.012893982808022923,
+  "best_threshold": 0.6919569448620692,
+  "tpr_at_threshold": 0.9676400947119179,
+  "tnr_at_threshold": 0.9804202483285578,
+  "fpr_at_threshold": 0.019579751671442217,
+  "precision_at_threshold": 0.9676400947119179,
+  "recall_at_threshold": 0.9676400947119179,
+  "f1_at_threshold": 0.9676400947119179,
+  "classification_report": {
+    "in_distribution": {
+      "precision": 0.9804202483285578,
+      "recall": 0.9804202483285578,
+      "f1-score": 0.9804202483285578,
+      "support": 2094.0
+    },
+    "ood": {
+      "precision": 0.9676400947119179,
+      "recall": 0.9676400947119179,
+      "f1-score": 0.9676400947119179,
+      "support": 1267.0
+    },
+    "accuracy": 0.9756024992561737,
+    "macro avg": {
+      "precision": 0.9740301715202379,
+      "recall": 0.9740301715202379,
+      "f1-score": 0.9740301715202379,
+      "support": 3361.0
+    },
+    "weighted avg": {
+      "precision": 0.9756024992561737,
+      "recall": 0.9756024992561737,
+      "f1-score": 0.9756024992561737,
+      "support": 3361.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      2053,
+      41
+    ],
+    [
+      41,
+      1226
+    ]
+  ],
+  "chosen_threshold": 0.6919569448620692,
+  "tuned_weights": {
+    "ood_gate_prob": 0.9,
+    "msp": 0.0,
+    "entropy": 0.1,
+    "energy": -0.0
+  },
+  "tuned_val_auroc": 0.9981407587541316,
+  "n_val": 3363,
+  "n_test": 3361,
+  "evaluated_on": "held-out ood_test -- never used for gate training, early stopping, weight tuning, or threshold search"
+}

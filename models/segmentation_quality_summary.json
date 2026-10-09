@@ -1,0 +1,44 @@
+[
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.39644451530612246,
+    "segmentation_confidence": 0.987786725688417,
+    "class": "Leaf_Mold"
+  },
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.281070631377551,
+    "segmentation_confidence": 0.9816964285555154,
+    "class": "Tomato_mosaic_virus"
+  },
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.3491709183673469,
+    "segmentation_confidence": 0.990613133069906,
+    "class": "healthy"
+  },
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.34311224489795916,
+    "segmentation_confidence": 0.9906481640958082,
+    "class": "FIELD_Spider_mites Two-spotted_spider_mite"
+  },
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.43763950892857145,
+    "segmentation_confidence": 0.9898089733868705,
+    "class": "FIELD_Tomato_Yellow_Leaf_Curl_Virus"
+  },
+  {
+    "has_ground_truth": false,
+    "note": "no ground truth available -- IoU/Dice not computed, reporting confidence-only summary",
+    "leaf_coverage": 0.32108976403061223,
+    "segmentation_confidence": 0.990595752318161,
+    "class": "FIELD_Tomato_mosaic_virus"
+  }
+]

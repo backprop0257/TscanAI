@@ -1,0 +1,778 @@
+{
+  "RQ1": {
+    "CNN_Only": {
+      "PV-Test": {
+        "accuracy": {
+          "value": 0.9158878504672897,
+          "ci95": [
+            0.899352983465133,
+            0.9309849029475198
+          ]
+        },
+        "macro_f1": {
+          "value": 0.8366389804320111,
+          "ci95": [
+            0.8046638666116592,
+            0.8658519124415789
+          ]
+        },
+        "ece_raw": {
+          "value": 0.3546063025206821,
+          "ci95": [
+            0.3402393299933606,
+            0.3683447880591423
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.0509908157317095,
+          "ci95": [
+            0.0446452632005441,
+            0.06613672852173372
+          ]
+        },
+        "n": 1391
+      },
+      "Field-Test": {
+        "accuracy": {
+          "value": 0.7765685019206146,
+          "ci95": [
+            0.7612035851472471,
+            0.7900128040973111
+          ]
+        },
+        "macro_f1": {
+          "value": 0.7773783702979692,
+          "ci95": [
+            0.760272417972456,
+            0.7917345698469199
+          ]
+        },
+        "ece_raw": {
+          "value": 0.26297360015186394,
+          "ci95": [
+            0.2503291720169073,
+            0.2756581536614635
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.02507868478797309,
+          "ci95": [
+            0.020568426531976842,
+            0.04080541299777665
+          ]
+        },
+        "n": 3124
+      },
+      "lab_to_field_gap_pp": {
+        "value": 13.931934854667515,
+        "ci95": [
+          12.014299212699894,
+          16.052095692907855
+        ]
+      },
+      "temperature": 0.4744939065403843
+    },
+    "VGG16": {
+      "PV-Test": {
+        "accuracy": {
+          "value": 0.9841840402588066,
+          "ci95": [
+            0.9769949676491733,
+            0.9906542056074766
+          ]
+        },
+        "macro_f1": {
+          "value": 0.9744995152550444,
+          "ci95": [
+            0.9587184970388556,
+            0.9872880452902394
+          ]
+        },
+        "ece_raw": {
+          "value": 0.39765677985144043,
+          "ci95": [
+            0.3911682114385384,
+            0.40556019154503825
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.019314971696893446,
+          "ci95": [
+            0.015912035171887908,
+            0.025797534413705362
+          ]
+        },
+        "n": 1391
+      },
+      "Field-Test": {
+        "accuracy": {
+          "value": 0.9516645326504481,
+          "ci95": [
+            0.9433418693982074,
+            0.9587067861715749
+          ]
+        },
+        "macro_f1": {
+          "value": 0.949130567380523,
+          "ci95": [
+            0.9385811813358519,
+            0.9584055336752711
+          ]
+        },
+        "ece_raw": {
+          "value": 0.34316837178989196,
+          "ci95": [
+            0.3361866300384229,
+            0.3500500454549486
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.01218583853617215,
+          "ci95": [
+            0.008317442356862798,
+            0.019697880002976446
+          ]
+        },
+        "n": 3124
+      },
+      "lab_to_field_gap_pp": {
+        "value": 3.2519507608358422,
+        "ci95": [
+          2.2673596312861797,
+          4.2196122457245355
+        ]
+      },
+      "temperature": 0.3588521865662791
+    },
+    "RegNetY008": {
+      "PV-Test": {
+        "accuracy": {
+          "value": 0.9618979151689432,
+          "ci95": [
+            0.9518332135154565,
+            0.9719626168224299
+          ]
+        },
+        "macro_f1": {
+          "value": 0.9234235570832364,
+          "ci95": [
+            0.9018684183422614,
+            0.9436161573362316
+          ]
+        },
+        "ece_raw": {
+          "value": 0.33378836129056216,
+          "ci95": [
+            0.3247197804135612,
+            0.343542553474263
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.03479488061153144,
+          "ci95": [
+            0.02982506871378781,
+            0.04424743336698377
+          ]
+        },
+        "n": 1391
+      },
+      "Field-Test": {
+        "accuracy": {
+          "value": 0.839628681177977,
+          "ci95": [
+            0.8265044814340589,
+            0.8524327784891165
+          ]
+        },
+        "macro_f1": {
+          "value": 0.8392036983907023,
+          "ci95": [
+            0.8246486990771823,
+            0.8540415373978634
+          ]
+        },
+        "ece_raw": {
+          "value": 0.27330142492368803,
+          "ci95": [
+            0.2626502742825098,
+            0.2845313022617923
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.026369243850704913,
+          "ci95": [
+            0.01934977257039957,
+            0.03857044487471351
+          ]
+        },
+        "n": 3124
+      },
+      "lab_to_field_gap_pp": {
+        "value": 12.226923399096624,
+        "ci95": [
+          10.667166764392642,
+          13.79393814359919
+        ]
+      },
+      "temperature": 0.4615854185363845
+    },
+    "EfficientNetB7": {
+      "PV-Test": {
+        "accuracy": {
+          "value": 0.9877785765636233,
+          "ci95": [
+            0.9813084112149533,
+            0.9928109273903667
+          ]
+        },
+        "macro_f1": {
+          "value": 0.9769798800245726,
+          "ci95": [
+            0.9607851783579597,
+            0.9882472332329417
+          ]
+        },
+        "ece_raw": {
+          "value": 0.319666370738761,
+          "ci95": [
+            0.3130992702288134,
+            0.3258193655334558
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.012960385753472492,
+          "ci95": [
+            0.010440007367959395,
+            0.018536284838024407
+          ]
+        },
+        "n": 1391
+      },
+      "Field-Test": {
+        "accuracy": {
+          "value": 0.9635083226632523,
+          "ci95": [
+            0.9567781690140845,
+            0.9699103713188221
+          ]
+        },
+        "macro_f1": {
+          "value": 0.9604674883330627,
+          "ci95": [
+            0.9515705304184053,
+            0.9696212175182811
+          ]
+        },
+        "ece_raw": {
+          "value": 0.29469590629814674,
+          "ci95": [
+            0.28923747251358806,
+            0.301395660740885
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.012948345321393965,
+          "ci95": [
+            0.008581575374721137,
+            0.01967349777787576
+          ]
+        },
+        "n": 3124
+      },
+      "lab_to_field_gap_pp": {
+        "value": 2.4270253900371075,
+        "ci95": [
+          1.4676892148262417,
+          3.291695470516059
+        ]
+      },
+      "temperature": 0.3856228520209364
+    },
+    "Hybrid_CNN_ViT": {
+      "PV-Test": {
+        "accuracy": {
+          "value": 0.9928109273903667,
+          "ci95": [
+            0.9884795111430625,
+            0.9964054636951833
+          ]
+        },
+        "macro_f1": {
+          "value": 0.9856935634283344,
+          "ci95": [
+            0.9722272497656396,
+            0.9957968448236972
+          ]
+        },
+        "ece_raw": {
+          "value": 0.37091482814741517,
+          "ci95": [
+            0.36620194402842704,
+            0.3755304753062624
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.010752376487664753,
+          "ci95": [
+            0.0070420833530827,
+            0.014661279720830723
+          ]
+        },
+        "n": 1391
+      },
+      "Field-Test": {
+        "accuracy": {
+          "value": 0.9686299615877081,
+          "ci95": [
+            0.9625480153649167,
+            0.9743918053777209
+          ]
+        },
+        "macro_f1": {
+          "value": 0.963544395324665,
+          "ci95": [
+            0.9546623112745284,
+            0.971404041959864
+          ]
+        },
+        "ece_raw": {
+          "value": 0.3657370419807914,
+          "ci95": [
+            0.36034199545522455,
+            0.3715282375441337
+          ]
+        },
+        "ece_calibrated": {
+          "value": 0.01071865162150346,
+          "ci95": [
+            0.00687770761821352,
+            0.01657970052226785
+          ]
+        },
+        "n": 3124
+      },
+      "lab_to_field_gap_pp": {
+        "value": 2.4180965802658605,
+        "ci95": [
+          1.6501832707242676,
+          3.1146484488264203
+        ]
+      },
+      "temperature": 0.3869579602707148
+    }
+  },
+  "RQ2": {
+    "trained_the_same_way": true,
+    "pipeline_per_model": {
+      "CNN_Only": "v22",
+      "VGG16": "v22",
+      "RegNetY008": "v22",
+      "EfficientNetB7": "v22",
+      "Hybrid_CNN_ViT": "v22"
+    },
+    "note": "same data, splits, preprocessing, augmentation, 3-stage schedule, EMA, TTA and calibration for every model; the fusion models additionally use their architecture-specific losses and CNN-teacher distillation",
+    "answer": "SUPPORTED"
+  },
+  "RQ3": {
+    "ood_gate": {
+      "auroc": 0.9781754385964911,
+      "tomato_accept_rate": 0.9116666666666666,
+      "non_tomato_reject_rate": 0.9763157894736842,
+      "classifier_acc_all_tomato": 0.9816666666666667,
+      "classifier_acc_after_gate": 0.9926873857404022
+    },
+    "temperature_scaling": {
+      "accuracy_changed": false,
+      "ece_lowered_for": "10/10 model x split"
+    },
+    "leaf_focus": {
+      "lfs_by_model": {
+        "CNN_Only": 0.665305509661563,
+        "EfficientNetB7": 0.7416917185766773,
+        "Hybrid_CNN_ViT": 0.9314910521796549,
+        "RegNetY008": 0.6179748942042453,
+        "VGG16": 0.5525978151985627
+      },
+      "hybrid_lfs_correct_vs_wrong": [
+        0.9315415635485351,
+        0.923459744527711
+      ],
+      "auroc_lfs_predicts_correctness": 0.7547169811320755
+    },
+    "tta_vs_single_pass_field_acc": {
+      "CNN_Only": [
+        0.7765685019206146,
+        0.7765685019206146
+      ],
+      "VGG16": [
+        0.9471830985915493,
+        0.9516645326504481
+      ],
+      "RegNetY008": [
+        0.8367477592829705,
+        0.839628681177977
+      ],
+      "EfficientNetB7": [
+        0.9619078104993598,
+        0.9635083226632523
+      ],
+      "Hybrid_CNN_ViT": [
+        0.9673495518565941,
+        0.9686299615877081
+      ]
+    },
+    "checks": {
+      "gate_auroc_high": true,
+      "gate_does_not_lower_accuracy": true,
+      "temperature_lowers_ece_every_model": true,
+      "accuracy_unchanged_by_temperature": true,
+      "hybrid_lfs_majority_on_leaf": true,
+      "cam_regulariser_no_accuracy_cost": true
+    },
+    "answer": "YES"
+  },
+  "H1": {
+    "rule": "(a) every model: field-test accuracy >= 85% and significantly higher than before field fine-tuning (McNemar p < 0.05); (b) temperature scaling lowers ECE for every model on PV-Test and Field-Test",
+    "a_field_finetuning": {
+      "CNN_Only": {
+        "field_acc_final": 0.7765685019206146,
+        "useful": false,
+        "field_acc_before_field_finetune": 0.7119078104993598,
+        "gain": {
+          "diff": 0.06466069142125475,
+          "ci95": [
+            0.05312900128040964,
+            0.07651248399487842
+          ],
+          "mcnemar_p": 1.1454028361648364e-24,
+          "only_a_correct": 302,
+          "only_b_correct": 100
+        },
+        "significant_gain": true,
+        "ok": false
+      },
+      "VGG16": {
+        "field_acc_final": 0.9516645326504481,
+        "useful": true,
+        "field_acc_before_field_finetune": 0.8124199743918054,
+        "gain": {
+          "diff": 0.1392445582586428,
+          "ci95": [
+            0.12611235595390524,
+            0.15268886043533925
+          ],
+          "mcnemar_p": 1.1159367259963802e-102,
+          "only_a_correct": 463,
+          "only_b_correct": 28
+        },
+        "significant_gain": true,
+        "ok": true
+      },
+      "RegNetY008": {
+        "field_acc_final": 0.839628681177977,
+        "useful": false,
+        "field_acc_before_field_finetune": 0.7743277848911652,
+        "gain": {
+          "diff": 0.0653008962868118,
+          "ci95": [
+            0.055057618437900135,
+            0.07618437900128039
+          ],
+          "mcnemar_p": 7.72147188131329e-30,
+          "only_a_correct": 273,
+          "only_b_correct": 69
+        },
+        "significant_gain": true,
+        "ok": false
+      },
+      "EfficientNetB7": {
+        "field_acc_final": 0.9635083226632523,
+        "useful": true,
+        "field_acc_before_field_finetune": 0.7682458386683739,
+        "gain": {
+          "diff": 0.19526248399487833,
+          "ci95": [
+            0.18085787451984636,
+            0.21030729833546735
+          ],
+          "mcnemar_p": 1.9661178829993086e-157,
+          "only_a_correct": 631,
+          "only_b_correct": 21
+        },
+        "significant_gain": true,
+        "ok": true
+      },
+      "Hybrid_CNN_ViT": {
+        "field_acc_final": 0.9686299615877081,
+        "useful": true,
+        "field_acc_before_field_finetune": 0.9507042253521126,
+        "gain": {
+          "diff": 0.017925736235595457,
+          "ci95": [
+            0.012155889884763118,
+            0.024327784891165164
+          ],
+          "mcnemar_p": 1.5905328473786136e-08,
+          "only_a_correct": 78,
+          "only_b_correct": 22
+        },
+        "significant_gain": true,
+        "ok": true
+      }
+    },
+    "b_temperature_scaling": {
+      "CNN_Only": {
+        "PV-Test": {
+          "ece_raw": 0.3546063025206821,
+          "ece_calibrated": 0.0509908157317095,
+          "lowered": true
+        },
+        "Field-Test": {
+          "ece_raw": 0.26297360015186394,
+          "ece_calibrated": 0.02507868478797309,
+          "lowered": true
+        }
+      },
+      "VGG16": {
+        "PV-Test": {
+          "ece_raw": 0.39765677985144043,
+          "ece_calibrated": 0.019314971696893446,
+          "lowered": true
+        },
+        "Field-Test": {
+          "ece_raw": 0.34316837178989196,
+          "ece_calibrated": 0.01218583853617215,
+          "lowered": true
+        }
+      },
+      "RegNetY008": {
+        "PV-Test": {
+          "ece_raw": 0.33378836129056216,
+          "ece_calibrated": 0.03479488061153144,
+          "lowered": true
+        },
+        "Field-Test": {
+          "ece_raw": 0.27330142492368803,
+          "ece_calibrated": 0.026369243850704913,
+          "lowered": true
+        }
+      },
+      "EfficientNetB7": {
+        "PV-Test": {
+          "ece_raw": 0.319666370738761,
+          "ece_calibrated": 0.012960385753472492,
+          "lowered": true
+        },
+        "Field-Test": {
+          "ece_raw": 0.29469590629814674,
+          "ece_calibrated": 0.012948345321393965,
+          "lowered": true
+        }
+      },
+      "Hybrid_CNN_ViT": {
+        "PV-Test": {
+          "ece_raw": 0.37091482814741517,
+          "ece_calibrated": 0.010752376487664753,
+          "lowered": true
+        },
+        "Field-Test": {
+          "ece_raw": 0.3657370419807914,
+          "ece_calibrated": 0.01071865162150346,
+          "lowered": true
+        }
+      }
+    },
+    "verdict": "PARTIALLY SUPPORTED"
+  },
+  "H2": {
+    "rule": "hybrid macro-F1 higher than every single-backbone model on PV-Test and on Field-Test (paired bootstrap 95% CI of the difference + McNemar)",
+    "comparisons": {
+      "PV-Test": {
+        "hybrid_macro_f1": 0.9856935634283344,
+        "vs": {
+          "CNN_Only": {
+            "their_macro_f1": 0.8366389804320111,
+            "diff": 0.14905458299632324,
+            "ci95": [
+              0.11906777741681399,
+              0.18202558406907943
+            ],
+            "mcnemar_p": 3.389636702121535e-31,
+            "only_a_correct": 108,
+            "only_b_correct": 1
+          },
+          "VGG16": {
+            "their_macro_f1": 0.9744995152550444,
+            "diff": 0.01119404817328995,
+            "ci95": [
+              -0.005106731104997227,
+              0.028821233549743454
+            ],
+            "mcnemar_p": 0.01181793212890625,
+            "only_a_correct": 16,
+            "only_b_correct": 4
+          },
+          "RegNetY008": {
+            "their_macro_f1": 0.9234235570832364,
+            "diff": 0.06227000634509794,
+            "ci95": [
+              0.03975424318961399,
+              0.0856361092924857
+            ],
+            "mcnemar_p": 2.4163071543625847e-10,
+            "only_a_correct": 47,
+            "only_b_correct": 4
+          },
+          "EfficientNetB7": {
+            "their_macro_f1": 0.9769798800245726,
+            "diff": 0.008713683403761774,
+            "ci95": [
+              0.002390420470277435,
+              0.01793920304082092
+            ],
+            "mcnemar_p": 0.0390625,
+            "only_a_correct": 8,
+            "only_b_correct": 1
+          }
+        }
+      },
+      "Field-Test": {
+        "hybrid_macro_f1": 0.963544395324665,
+        "vs": {
+          "CNN_Only": {
+            "their_macro_f1": 0.7773783702979692,
+            "diff": 0.18616602502669577,
+            "ci95": [
+              0.17137169140579897,
+              0.20285567414022182
+            ],
+            "mcnemar_p": 1.8333236103609985e-155,
+            "only_a_correct": 620,
+            "only_b_correct": 20
+          },
+          "VGG16": {
+            "their_macro_f1": 0.949130567380523,
+            "diff": 0.014413827944141921,
+            "ci95": [
+              0.006390283237506613,
+              0.02262688433892269
+            ],
+            "mcnemar_p": 1.6099271769508826e-07,
+            "only_a_correct": 78,
+            "only_b_correct": 25
+          },
+          "RegNetY008": {
+            "their_macro_f1": 0.8392036983907023,
+            "diff": 0.12434069693396266,
+            "ci95": [
+              0.11087981556566051,
+              0.1375538424966776
+            ],
+            "mcnemar_p": 5.92040579925774e-101,
+            "only_a_correct": 421,
+            "only_b_correct": 18
+          },
+          "EfficientNetB7": {
+            "their_macro_f1": 0.9604674883330627,
+            "diff": 0.003076906991602235,
+            "ci95": [
+              -0.0027522054776781433,
+              0.00870315526100467
+            ],
+            "mcnemar_p": 0.019520472782460274,
+            "only_a_correct": 29,
+            "only_b_correct": 13
+          }
+        }
+      }
+    },
+    "all_differences_significant": false,
+    "verdict": "SUPPORTED"
+  },
+  "H3": {
+    "rule": "whole-gate AUROC (held-out tomato vs non-tomato photos) >= 0.95 and the hybrid's mean Leaf-Focus Score >= 0.5 (share of raw Grad-CAM on the leaf)",
+    "gate_auroc": 0.9781754385964911,
+    "gate_fpr_at_95tpr": 0.04736842105263158,
+    "ood_cnn_heldout_auroc": 0.9970091568423028,
+    "per_source_reject_rate": {
+      "background/dtd": 1.0,
+      "background/fieldbg": 0.9620253164556962,
+      "hard_negative/cat5": 0.9466666666666667,
+      "non_leaf/faces": 1.0,
+      "non_leaf/scenes": 1.0,
+      "other_leaf/plantdoc": 0.97,
+      "other_leaf/pv-other": 0.9733333333333334
+    },
+    "unseen_source_reject_rate": null,
+    "hybrid_lfs": {
+      "mean": 0.9314910521796549,
+      "ci95": [
+        0.9216775448208168,
+        0.9399123864840324
+      ],
+      "n": 160
+    },
+    "lfs_by_model": {
+      "CNN_Only": {
+        "mean": 0.665305509661563,
+        "ci95": [
+          0.6306697632306915,
+          0.6984988691449726
+        ],
+        "n": 160
+      },
+      "EfficientNetB7": {
+        "mean": 0.7416917185766773,
+        "ci95": [
+          0.7151093829486086,
+          0.7671781503658669
+        ],
+        "n": 160
+      },
+      "Hybrid_CNN_ViT": {
+        "mean": 0.9314910521796549,
+        "ci95": [
+          0.9216775448208168,
+          0.9399123864840324
+        ],
+        "n": 160
+      },
+      "RegNetY008": {
+        "mean": 0.6179748942042453,
+        "ci95": [
+          0.5650363421009443,
+          0.6741680849872727
+        ],
+        "n": 160
+      },
+      "VGG16": {
+        "mean": 0.5525978151985627,
+        "ci95": [
+          0.502208865583561,
+          0.6013663347949384
+        ],
+        "n": 160
+      }
+    },
+    "checks": {
+      "gate_auroc_high": true,
+      "hybrid_lfs_majority_on_leaf": true,
+      "lfs_ci_lower_above_threshold": true
+    },
+    "verdict": "SUPPORTED"
+  },
+  "settings": {
+    "tta": true,
+    "calibrated_on": [
+      "pv_val",
+      "field_val"
+    ],
+    "bootstrap": 1000,
+    "thresholds": {
+      "V23_USEFUL_FIELD_ACC": 0.85,
+      "V23_OOD_AUROC_MIN": 0.95,
+      "V23_LFS_MIN": 0.5,
+      "V23_MAX_ACC_DROP": 0.005
+    }
+  }
+}

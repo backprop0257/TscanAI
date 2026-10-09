@@ -1,0 +1,12 @@
+{
+  "_help": "OPTIONAL display settings. The app finds and runs every model in models/ without this file. Add an entry (matched by model name, e.g. VGG16 for VGG16_final.keras) to set: label, short, kind (proposed | baseline | ablation | custom), desc, order (number, lower = first), default (true = selected at start), hidden (true = do not show), preprocess (auto | 0-1 | 0-255 | -1-1 | caffe | torch), class_names (list). Entries for models you do not have are ignored.",
+  "Hybrid_CNN_ViT": {"label": "LAG-HViT (proposed hybrid)", "short": "LAG-HViT", "kind": "proposed", "order": 1,
+    "desc": "Lesion-attention-guided hybrid CNN-Vision Transformer: the CNN lesion map steers the transformer (lesion-biased attention), gated fusion, deep supervision."},
+  "EfficientNetB7": {"label": "EfficientNetB7", "kind": "baseline", "desc": "ImageNet-pretrained EfficientNetB7 on the shared v21 trunk."},
+  "VGG16": {"label": "VGG16", "kind": "baseline", "desc": "ImageNet-pretrained VGG16 on the shared v21 trunk."},
+  "RegNetY008": {"label": "RegNetY-008", "kind": "baseline", "desc": "RegNetY-style network (grouped conv + squeeze-excitation), trained from scratch."},
+  "CNN_Only": {"label": "Custom CNN", "kind": "baseline", "desc": "The proposal's custom convolutional network, trained from scratch."},
+  "NaiveConcat_CNN_ViT": {"label": "Naive concat (ablation)", "kind": "ablation", "desc": "Hybrid without lesion bias, lesion pooling and gated fusion."},
+  "ViT_Branch": {"label": "ViT branch only (ablation)", "kind": "ablation", "desc": "Transformer branch alone on the CNN-stem tokens."},
+  "Hybrid_CNN_ViT_noCAMreg": {"label": "Hybrid without CAM regulariser (ablation)", "kind": "ablation", "desc": "Proposed hybrid trained without the Leaf-Focus loss."}
+}

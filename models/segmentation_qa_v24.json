@@ -1,0 +1,58 @@
+{
+  "by_split": [
+    {
+      "split": "Field-Test",
+      "n": 120,
+      "reliable": 1.0,
+      "coverage": 0.388,
+      "confidence": 0.99,
+      "flip_iou": 0.954
+    },
+    {
+      "split": "Field-Train",
+      "n": 120,
+      "reliable": 0.992,
+      "coverage": 0.379,
+      "confidence": 0.991,
+      "flip_iou": 0.976
+    },
+    {
+      "split": "PV-Test",
+      "n": 120,
+      "reliable": 1.0,
+      "coverage": 0.381,
+      "confidence": 0.989,
+      "flip_iou": 0.983
+    },
+    {
+      "split": "PV-Train",
+      "n": 120,
+      "reliable": 1.0,
+      "coverage": 0.387,
+      "confidence": 0.991,
+      "flip_iou": 0.986
+    }
+  ],
+  "lesion_fraction_median_pct": [
+    {
+      "split": "Field-Test",
+      "lesion% diseased": 1.139336846023721,
+      "lesion% healthy": 0.0
+    },
+    {
+      "split": "Field-Train",
+      "lesion% diseased": 1.3035195177155852,
+      "lesion% healthy": 0.0
+    },
+    {
+      "split": "PV-Test",
+      "lesion% diseased": 1.3885161596321514,
+      "lesion% healthy": 1.138891069722635
+    },
+    {
+      "split": "PV-Train",
+      "lesion% diseased": 1.7483553566271244,
+      "lesion% healthy": 0.5867370144637497
+    }
+  ]
+}

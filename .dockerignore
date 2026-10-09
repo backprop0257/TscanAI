@@ -1,0 +1,9 @@
+.git
+.venv
+__pycache__
+*.pyc
+instance/
+tests/
+*.zip
+# models/ and results/ ARE copied when they contain files (bundled deployment);
+# leave them empty and set HF_MODEL_REPO to download them at start instead.

@@ -1,0 +1,14 @@
+Put your trained models here -- ANY number, ANY architecture. The app finds them by itself
+(also while it is running; no code change, no restart):
+
+  <Name>_final.keras / <Name>.keras / <Name>.h5     Keras classifiers (v21 notebook models or any other)
+  <Name>/  (folder containing saved_model.pb)         TensorFlow SavedModel
+
+Optional, used when present:
+  class_indices.json        class names (notebook Cell 1.4); default = the 10 PlantVillage tomato classes
+  <Name>_classes.json       class names for one model trained on a different class list
+  ood_gate.keras, feature_ood_v21.json   deep tomato-leaf check (Cells 4.3, 9.5)
+  model_info.json / <Name>.json          display name, type, description, input scaling (see README)
+  custom_layers/*.py        code for custom Keras layers your models use
+
+Skipped automatically: ood_gate*.keras, *_pvonly.keras, stage checkpoints (*_s1, *_s2), *.weights.h5.

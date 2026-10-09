@@ -1,0 +1,2 @@
+Put the notebook results folder contents here (see README section 2):
+  calibration_summary.json, gate_v21_config.json, eval/, plots/, *.csv, *.json

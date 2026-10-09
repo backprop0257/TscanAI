@@ -1,0 +1,28 @@
+{
+  "mcnemar_hybrid_vs_best_backbone": {
+    "contingency_table": {
+      "both_correct": 1373,
+      "a_only_correct": 8,
+      "b_only_correct": 1,
+      "both_wrong": 9
+    },
+    "n_discordant": 9,
+    "statistic": 1.0,
+    "p_value": 0.0390625,
+    "method": "exact binomial (n_discordant < threshold)"
+  },
+  "best_backbone": "EfficientNetB7",
+  "mcnemar_hybrid_vs_best_backbone_field": {
+    "contingency_table": {
+      "both_correct": 2997,
+      "a_only_correct": 29,
+      "b_only_correct": 13,
+      "both_wrong": 85
+    },
+    "n_discordant": 42,
+    "statistic": 5.357142857142857,
+    "p_value": 0.020637558243972176,
+    "method": "chi-square with continuity correction"
+  },
+  "best_backbone_field": "EfficientNetB7"
+}

@@ -1,0 +1,37 @@
+{
+  "background/dtd": {
+    "auroc": 0.9875,
+    "n": 45,
+    "reject_rate": 1.0
+  },
+  "background/fieldbg": {
+    "auroc": 0.9703586497890296,
+    "n": 79,
+    "reject_rate": 0.9620253164556962
+  },
+  "hard_negative/cat5": {
+    "auroc": 0.9693944444444444,
+    "n": 150,
+    "reject_rate": 0.9466666666666667
+  },
+  "non_leaf/faces": {
+    "auroc": 0.9872951977401131,
+    "n": 118,
+    "reject_rate": 1.0
+  },
+  "non_leaf/scenes": {
+    "auroc": 0.9875,
+    "n": 118,
+    "reject_rate": 1.0
+  },
+  "other_leaf/plantdoc": {
+    "auroc": 0.9764833333333334,
+    "n": 100,
+    "reject_rate": 0.97
+  },
+  "other_leaf/pv-other": {
+    "auroc": 0.9748944444444445,
+    "n": 150,
+    "reject_rate": 0.9733333333333334
+  }
+}
