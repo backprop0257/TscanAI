@@ -1,0 +1,6 @@
+model,deletion_auc,deletion_auc_random,insertion_auc,deletion_gain_vs_random,spearman_trained_vs_randomised_head,n,randomised_dense_layers
+CNN_Only,0.2283,0.1744,0.4978,-0.0539,0.03576988200926594,20,3
+EfficientNetB7,0.2066,0.2664,0.6281,0.0598,-0.008520739764316025,20,3
+Hybrid_CNN_ViT,0.1704,0.2238,0.5846,0.0534,-0.2200080160176127,20,24
+RegNetY008,0.2968,0.1865,0.4771,-0.1103,-0.05076975861694834,20,3
+VGG16,0.3669,0.1933,0.4989,-0.1736,0.3249120744133677,20,3

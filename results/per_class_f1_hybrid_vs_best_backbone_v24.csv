@@ -1,0 +1,21 @@
+split,class,hybrid_f1,EfficientNetB7_f1,diff_pp
+PV-Test,Bacterial_spot,99.59,98.79,0.81
+PV-Test,Early_blight,93.62,89.8,3.82
+PV-Test,Late_blight,99.04,97.56,1.48
+PV-Test,Leaf_Mold,97.78,97.78,0.0
+PV-Test,Septoria_leaf_spot,100.0,99.44,0.56
+PV-Test,Spider_mites Two-spotted_spider_mite,97.65,97.65,0.0
+PV-Test,Target_Spot,98.65,97.33,1.32
+PV-Test,Tomato_Yellow_Leaf_Curl_Virus,99.58,99.5,0.08
+PV-Test,Tomato_mosaic_virus,100.0,100.0,0.0
+PV-Test,healthy,99.78,99.13,0.65
+Field-Test,Bacterial_spot,97.03,96.54,0.48
+Field-Test,Early_blight,93.83,92.93,0.9
+Field-Test,Late_blight,96.07,95.2,0.87
+Field-Test,Leaf_Mold,98.55,98.55,-0.0
+Field-Test,Septoria_leaf_spot,96.89,95.98,0.9
+Field-Test,Spider_mites Two-spotted_spider_mite,99.81,99.62,0.19
+Field-Test,Target_Spot,99.09,99.45,-0.36
+Field-Test,Tomato_Yellow_Leaf_Curl_Virus,97.04,96.25,0.79
+Field-Test,Tomato_mosaic_virus,100.0,100.0,0.0
+Field-Test,healthy,85.25,85.94,-0.69

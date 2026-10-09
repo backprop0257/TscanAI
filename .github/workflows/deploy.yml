@@ -1,0 +1,18 @@
+name: Deploy to Hugging Face Space
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install huggingface_hub
+      - run: python tools/push_to_hf.py --project . --skip-models --space ${{ secrets.HF_SPACE }} --models-repo ${{ secrets.HF_MODELS_REPO }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+
+          

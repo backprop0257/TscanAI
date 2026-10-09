@@ -1,0 +1,11 @@
+cls,CNN_Only,EfficientNetB7,Hybrid_CNN_ViT,RegNetY008,VGG16
+Bacterial_spot,0.859,0.788,0.969,0.523,0.754
+Early_blight,0.595,0.74,0.953,0.458,0.305
+Late_blight,0.485,0.719,0.881,0.294,0.577
+Leaf_Mold,0.72,0.923,0.941,0.669,0.63
+Septoria_leaf_spot,0.759,0.69,0.936,0.728,0.278
+Spider_mites Two-spotted_spider_mite,0.51,0.76,0.947,0.455,0.583
+Target_Spot,0.82,0.671,0.93,0.921,0.547
+Tomato_Yellow_Leaf_Curl_Virus,0.698,0.834,0.941,0.884,0.527
+Tomato_mosaic_virus,0.687,0.633,0.916,0.666,0.7
+healthy,0.521,0.658,0.901,0.582,0.624

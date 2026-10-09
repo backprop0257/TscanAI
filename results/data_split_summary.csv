@@ -1,0 +1,12 @@
+Class,PV Train,PV Val,PV Test,Field-Real Train,Field-Real Val,Field-Real Test,Total
+Bacterial_spot,1866,128,123,3605,118,83,5923
+Early_blight,949,25,23,3014,131,114,4256
+Late_blight,1703,97,104,3879,116,99,5998
+Leaf_Mold,899,24,23,3266,36,21,4269
+Septoria_leaf_spot,1561,117,89,3676,100,105,5648
+Spider_mites Two-spotted_spider_mite,1463,102,105,2429,66,50,4215
+Target_Spot,1236,86,73,2322,106,89,3912
+Tomato_Yellow_Leaf_Curl_Virus,4162,585,601,2750,138,129,8365
+Tomato_mosaic_virus,339,16,18,495,19,15,902
+healthy,1123,232,232,268,42,47,1944
+TOTAL,15301,1412,1391,25704,872,752,45432

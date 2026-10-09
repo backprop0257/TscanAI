@@ -1,0 +1,6 @@
+model,params_M,file_MB,ms_per_image_batch1,ms_with_tta,device
+CNN_Only,6.29,25.4,7.7,23.0,GPU
+VGG16,16.97,68.0,11.8,35.4,GPU
+RegNetY008,4.6,19.0,11.5,34.5,GPU
+EfficientNetB7,67.03,271.0,46.4,139.2,GPU
+Hybrid_CNN_ViT,70.41,284.8,48.1,144.3,GPU

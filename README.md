@@ -236,3 +236,27 @@ tier, 16 GB RAM). The site is live at `https://<hf-user>-tomatoleafai.hf.space` 
 | PDF download fails | `pip install reportlab` (it is in requirements.txt). |
 
 The advice is decision support, not a substitute for a local agronomist or the pesticide label.
+
+
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python app.py
+
+
+linux:
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python app.py
+
+
+pip install tensorflow==2.17.1 keras==3.15.1 numpy==1.26.4 "opencv-python-headless>=4.9,<5" "scipy>=1.11" "scikit-learn>=1.3" "pillow>=10.0" "flask>=3.0,<4" "reportlab>=4.0"
+
+hugging face:
+
+python tools\push_to_hf.py --project "C:\Users\ASUS\Downloads\TomatoLeafAI" --space YOUR_HF_NAME/tomatoleafai --models-repo Dammar/tomatoleafai-models
+
+python tools\push_to_hf.py --project "C:\Users\ASUS\Downloads\TomatoLeafAI" --space Dammar/tomatoleafai --models-repo Dammar/tomatoleafai-models

@@ -1,0 +1,11 @@
+condition,n,accepted_%,classifier_acc_on_accepted_%,top_reject_reason
+clean,100,97.0,100.0,low_confidence
+rotated 90,100,88.0,96.6,not_tomato
+mild blur,100,14.0,100.0,low_confidence
+strong blur,100,0.0,,low_confidence
+dark,100,64.0,96.9,low_confidence
+very dark,100,0.0,,low_confidence
+over-exposed,100,39.0,92.3,low_confidence
+noisy,100,75.0,96.0,low_confidence
+jpeg q10,100,19.0,100.0,low_confidence
+half leaf (crop),100,25.0,96.0,low_confidence
